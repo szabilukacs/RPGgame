@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <windows.h>
 #include <ctime>
@@ -13,6 +13,7 @@ class jatek
 private:
 	int o, v1, v2, d1, d2, elet, ero, olesek, h1, h2;
 	char s, c, h;
+	char nev[30];
 	void pozicio(int, int);
 	int ellenoriz(int, int);
 	void eltuntet(int, int);
@@ -24,6 +25,7 @@ public:
 	void mezo();
 	void gameover();
 	void vegsokiir();
+	void elsokiir();
 	friend class ellenseg;
 };
 
@@ -208,14 +210,13 @@ void jatek::mezo()
 		cout << "|";
 	}
 
-	pozicio(0, 35);
-	cout << "  A-Power:" << 50;
-	cout << "  B-Power:" << 115;
-	cout << "  C-Power:" << 130;
-	cout << "  D-Power:" << 175;
-	cout << "  W-Power:" << 275;
-	cout << "  P-Power+";
-	cout << "  H-Heal+" << "  ";
+	pozicio(0, 34);
+	cout << "  Power: Andariel-" << 50;
+	cout << "  duriel-" << 115;
+	cout << "  Baal-" << 130;
+	cout << "  Mephisto-" << 175;
+	cout << "  Diablo-" << 275;
+	
 }
 
 void jatek::eltuntet(int d1, int d2)
@@ -338,10 +339,53 @@ void jatek::vegsokiir()
 	cout << "Kills: " << olesek;
 	pozicio(9, 10);
 	cout << "Life: " << elet;
-	cout << endl;
-	cout << endl;
-	Sleep(5000);
+	pozicio(11, 10);
+	cout << "Congratulation " << nev<<"!";
+	Sleep(2000);
 	exit(0);
+}
+
+void jatek::elsokiir()
+{
+	char folosleg;
+	
+	pozicio(0,0);
+	char a[18][64];
+	ifstream be("cim.txt");
+	for (int i = 0; i < 15; i++)
+	{
+		for (int j = 0; j < 63; j++)
+		{
+			be >> a[i][j];
+			if (a[i][j] == '0')
+				a[i][j] = ' ';
+			cout << a[i][j];
+		}
+		cout << endl;
+	}
+		
+	cout << "\tYou are The Barbarian, a powerful melee fighter from the steppes of Mount Arreat." << endl;
+	cout << "\tHe is an expert at frontline combat, able to absorb great punishment," << endl;
+	cout<<"\tand is the only class capable of dual wielding weapons." << endl;
+	cout<<""<<endl;
+	cout << "\t\tYour enemies: " << endl;
+	cout << "\tAndariel - The Maiden of Anguish - Twin sister of Duriel. Sent to guard the Rogue Monastery by Diablo himself." << endl;
+	cout << "\tDuriel - The Lord of Pain - Though Duriel had his part in the Dark Exile. " << endl;
+	cout << "\tBaal - The Lord of Destruction - The Most Destructive, Insidious and Ruthless of the Three. " << endl;
+	cout << "\tMephisto - The Lord of Hatred - The Eldest of the Three, Leader of Prime Evils, Father of Lilith and Lucion." << endl;
+	cout << "\tDiablo - The Lord of Terror - The Youngest of the Three, The Strongest Prime Evil and Father of Leah. " << endl;
+	cout << endl;
+	cout << "\tKill all of the enemies and win the game!" << endl << "\tMove on the 'P' for more power and 'H' for more health" << endl;
+
+	cout << "Enter your name: ";
+	cin.getline(nev, 29);
+
+	cout <<endl <<"Press any key to start the game...";
+
+	folosleg = _getch();
+	system("cls");
+	
+	
 }
 
 
@@ -351,25 +395,26 @@ int main()
 	char m = 'h';
 	srand(time(NULL));
 	jatek A;
-	ellenseg E1('B', 115, 4);
-	ellenseg E2('C', 130, 3);
-	ellenseg E3('D', 175, 3);
+	ellenseg E1('d', 115, 4);
+	ellenseg E2('B', 130, 3);
+	ellenseg E3('M', 175, 3);
 	ellenseg E4('A', 50, 2);
 	ellenseg E5('A', 50, 2);
 	ellenseg E6('A', 50, 2);
 	ellenseg E7('A', 50, 2);
-	ellenseg E8('B', 115, 4);
-	ellenseg E9('B', 115, 4);
-	ellenseg E10('B', 115, 4);
-	ellenseg E11('B', 115, 4);
-	ellenseg E12('C', 130, 3);
-	ellenseg E13('C', 130, 3);
-	ellenseg E14('D', 175, 3);
-	ellenseg E15('D', 175, 3);
-	ellenseg E16('W', 275, 2);
+	ellenseg E8('d', 115, 4);
+	ellenseg E9('d', 115, 4);
+	ellenseg E10('d', 115, 4);
+	ellenseg E11('d', 115, 4);
+	ellenseg E12('B', 130, 3);
+	ellenseg E13('B', 130, 3);
+	ellenseg E14('M', 175, 3);
+	ellenseg E15('M', 175, 3);
+	ellenseg E16('D', 275, 2);
 
-	// nev beiras + kezdo kep
+	// optimalizalni, kommentelni
 	setcursor(0, 0);
+	A.elsokiir();
 	cout << "Move with the X and win the game!";
 	A.mezo();
 	while (m != 'q')
