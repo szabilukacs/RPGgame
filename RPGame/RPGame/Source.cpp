@@ -4,6 +4,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <conio.h>
+#include "Functions.h"
 
 using namespace std;
 
@@ -175,10 +176,7 @@ int jatek::ellenoriz(int d1, int d2)
 		return 0;
 	if ((d2 == 55) && (d1 >= 11) && (d1 <= 17))
 		return 0;
-	else
-		return 1;
-
-
+	return 1;
 }
 
 void jatek::mezo()
@@ -211,13 +209,13 @@ void jatek::mezo()
 	}
 
 	pozicio(0, 35);
-	cout << "  A-ereje:" << 50;
-	cout << "  K-ereje:" << 115;
-	cout << "  L-ereje:" << 130;
-	cout << "  M-ereje:" << 175;
-	cout << "  W-ereje:" << 275;
-	cout << "  P-ero";
-	cout << "  H-elet" << "  ";
+	cout << "  A-Power:" << 50;
+	cout << "  B-Power:" << 115;
+	cout << "  C-Power:" << 130;
+	cout << "  D-Power:" << 175;
+	cout << "  W-Power:" << 275;
+	cout << "  P-Power+";
+	cout << "  H-Heal+" << "  ";
 }
 
 void jatek::eltuntet(int d1, int d2)
@@ -236,9 +234,9 @@ void jatek::kiir(int d1, int d2)
 	pozicio(h1, h2);
 	cout << h;
 	pozicio(0, 0);
-	cout << "Pontszam: " << o;
-	cout << "  Elet: " << elet;
-	cout << "  Ero: " << ero << "  ";
+	cout << "Points: " << o;
+	cout << "  Life: " << elet;
+	cout << "  Power: " << ero << "  ";
 
 }
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -335,11 +333,11 @@ void jatek::vegsokiir()
 {
 	system("cls");
 	pozicio(5, 10);
-	cout << "Pontszam: " << o;
+	cout << "Points: " << o;
 	pozicio(7, 10);
-	cout << "Megolt ellensegek: " << olesek;
+	cout << "Kills: " << olesek;
 	pozicio(9, 10);
-	cout << "Elet: " << elet;
+	cout << "Life: " << elet;
 	cout << endl;
 	cout << endl;
 	Sleep(5000);
@@ -353,23 +351,26 @@ int main()
 	char m = 'h';
 	srand(time(NULL));
 	jatek A;
-	ellenseg E1('K', 115, 4);
-	ellenseg E2('L', 130, 3);
-	ellenseg E3('M', 175, 3);
+	ellenseg E1('B', 115, 4);
+	ellenseg E2('C', 130, 3);
+	ellenseg E3('D', 175, 3);
 	ellenseg E4('A', 50, 2);
 	ellenseg E5('A', 50, 2);
 	ellenseg E6('A', 50, 2);
 	ellenseg E7('A', 50, 2);
-	ellenseg E8('K', 115, 4);
-	ellenseg E9('K', 115, 4);
-	ellenseg E10('K', 115, 4);
-	ellenseg E11('K', 115, 4);
-	ellenseg E12('L', 130, 3);
-	ellenseg E13('L', 130, 3);
-	ellenseg E14('M', 175, 3);
-	ellenseg E15('M', 175, 3);
+	ellenseg E8('B', 115, 4);
+	ellenseg E9('B', 115, 4);
+	ellenseg E10('B', 115, 4);
+	ellenseg E11('B', 115, 4);
+	ellenseg E12('C', 130, 3);
+	ellenseg E13('C', 130, 3);
+	ellenseg E14('D', 175, 3);
+	ellenseg E15('D', 175, 3);
 	ellenseg E16('W', 275, 2);
+
+	// nev beiras + kezdo kep
 	setcursor(0, 0);
+	cout << "Move with the X and win the game!";
 	A.mezo();
 	while (m != 'q')
 	{
