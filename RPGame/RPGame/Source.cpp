@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void fokozat(int &a)
+void fokozat(int &a)      // visszateriti a megadott fokozatot
 {
 
 	cout << endl << endl << endl;
@@ -24,11 +24,11 @@ void fokozat(int &a)
 int main()
 {
 	int nr = 1;
-	int level;
-	char m = 'h';
+	int level;  
+	char m = 'h';  // ez olvasodik be folyamatosan, mindegy mire van inicializalva
 	srand(time(NULL));
 	fokozat(level);
-	int e1, e2, e3, e4, e5;
+	int e1, e2, e3, e4, e5;  // 5-fajta ellenseg ereje a kulonbozo fokozatokhoz
 	switch (level)
 	{
 	case 1:   //easy
@@ -62,8 +62,8 @@ int main()
 	}
 	
 	
-		jatekos A(100, 100, 0, e1, e2, e3, e4, e5);  
-		ellenseg E1('d', e2, 4);
+		jatekos A(100, 100, 0, e1, e2, e3, e4, e5);  // letrehozza a jatekost
+		ellenseg E1('d', e2, 4);                     // ellensegek letrehozasa
 		ellenseg E2('B', e3, 3);
 		ellenseg E3('M', e4, 3);
 		ellenseg E4('A', e1, 2);
@@ -80,12 +80,11 @@ int main()
 		ellenseg E15('M', e4, 3);
 		ellenseg E16('D', e5, 2);
 
-		// optimalizalni, kommentelni
-		A.setcursor(0, 0);
+		A.setcursor(false, 0);
 		A.elsokiir();
 		cout << "Move with the X and win the game!";
-		A.mezo();
-		while (m != 'q')
+		A.mezo();                   // mezo kiiratasa
+		while (m != 'q')            // amig nem q(Quit) addig megy a jatek
 		{
 			m = _getch();
 			A.lepes(m, nr);
