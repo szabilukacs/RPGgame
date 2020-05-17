@@ -8,18 +8,20 @@
 
 using namespace std;
 
-class jatek
+class jatekos
 {
 private:
 	int o, v1, v2, d1, d2, elet, ero, olesek, h1, h2;
 	char s, c, h;
+	clock_t begin, end;
+	double time_spent;
 	char nev[30];
 	void pozicio(int, int);
 	int ellenoriz(int, int);
 	void eltuntet(int, int);
 
 public:
-	jatek();
+	jatekos(int ,int ,int);
 	void kiir(int, int);
 	void lepes(char, int &);
 	void mezo();
@@ -37,10 +39,10 @@ private:
 	void pozicio(int, int);
 	void eltuntet(int p1, int p2) { pozicio(p1, p2); cout << " "; }
 	void kiir(int, int);
-	void nagyellenoriz(jatek &);
+	void nagyellenoriz(jatekos &);
 public:
 	ellenseg(char, int, int);
-	void randlepes(int &, jatek &);
+	void randlepes(int &, jatekos &);
 	int ellenorize(int, int);
 	friend class jatek;
 
@@ -71,7 +73,7 @@ void ellenseg::kiir(int p1, int p2)
 	cout << s;
 }
 
-void ellenseg::nagyellenoriz(jatek &A)
+void ellenseg::nagyellenoriz(jatekos &A)
 {
 	if ((A.d1 == p1) && (A.d2 == p2))
 	{
@@ -86,8 +88,11 @@ void ellenseg::nagyellenoriz(jatek &A)
 		}
 		else
 		{
-			if (eroe - A.ero > A.elet)
+			if (eroe - A.ero > A.elet) 
+			{
+				A.elet = 0;
 				A.gameover();
+			}
 			else
 			{
 				A.elet = A.elet - eroe / 10;
@@ -97,7 +102,7 @@ void ellenseg::nagyellenoriz(jatek &A)
 	}
 }
 
-void ellenseg::randlepes(int &nr, jatek &A)
+void ellenseg::randlepes(int &nr, jatekos &A)
 {
 	int l;
 	if (s != ' ')
@@ -151,7 +156,7 @@ int ellenseg::ellenorize(int d1, int d2)
 		return 1;
 }
 
-jatek::jatek()
+jatekos::jatekos(int _elet, int _ero, int _olesek)
 {
 	o = 0;
 	s = 'X';
@@ -163,12 +168,12 @@ jatek::jatek()
 	d2 = rand() % 78 + 1;
 	h1 = rand() % 24 + 2;
 	h2 = rand() % 78 + 1;
-	elet = 100;
-	ero = 100;
-	olesek = 0;
+	elet = _elet;
+	ero = _ero;
+	olesek = _olesek;
 }
 
-int jatek::ellenoriz(int d1, int d2)
+int jatekos::ellenoriz(int d1, int d2)
 {
 	if ((d1 == 1) || (d1 == 26) || (d2 == 0) || (d2 == 79))
 		return 0;
@@ -181,25 +186,22 @@ int jatek::ellenoriz(int d1, int d2)
 	return 1;
 }
 
-void jatek::mezo()
+void jatekos::mezo()
 {
-	pozicio(1, 0);
-	for (int i = 1; i <= 8; i++)
-		cout << "----------";
+	pozicio(1, 0);	
+	cout << "--------------------------------------------------------------------------------";
 	for (int j = 1; j <= 24; j++)
 	{
 		pozicio(1 + j, 0);
 		cout << "|";
 	}
 	pozicio(26, 0);
-	for (int i = 1; i <= 8; i++)
-		cout << "----------";
+	cout << "--------------------------------------------------------------------------------";
 	for (int j = 1; j <= 24; j++)
 	{
 		pozicio(1 + j, 79);
 		cout << "|";
 	}
-
 	pozicio(13, 20);
 	cout << "-------";
 	pozicio(6, 61);
@@ -219,15 +221,14 @@ void jatek::mezo()
 	
 }
 
-void jatek::eltuntet(int d1, int d2)
+void jatekos::eltuntet(int d1, int d2)
 {
 	pozicio(d1, d2);
 	cout << " ";
 }
 
-void jatek::kiir(int d1, int d2)
+void jatekos::kiir(int d1, int d2)
 {
-
 	pozicio(d1, d2);
 	cout << s;
 	pozicio(v1, v2);
@@ -238,22 +239,19 @@ void jatek::kiir(int d1, int d2)
 	cout << "Points: " << o;
 	cout << "  Life: " << elet;
 	cout << "  Power: " << ero << "  ";
-
 }
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void setcursor(bool visible, DWORD size)
 {
-
 	size = 20;
-
 	CONSOLE_CURSOR_INFO lpCursor;
 	lpCursor.bVisible = visible;
 	lpCursor.dwSize = size;
 	SetConsoleCursorInfo(console, &lpCursor);
 }
 
-void jatek::pozicio(int sor, int oszlop)
+void jatekos::pozicio(int sor, int oszlop)
 {
 	COORD c;
 	c.Y = sor;
@@ -261,7 +259,7 @@ void jatek::pozicio(int sor, int oszlop)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
-void jatek::lepes(char m, int &nr)
+void jatekos::lepes(char m, int &nr)
 {
 	switch (m)
 	{
@@ -304,7 +302,7 @@ void jatek::lepes(char m, int &nr)
 
 }
 
-void jatek::gameover()
+void jatekos::gameover()
 {
 	char a[18][60];
 	ifstream be("valami.txt");
@@ -318,7 +316,7 @@ void jatek::gameover()
 	for (int i = 1; i <= 3; i++)
 	{
 		system("cls");
-		Sleep(700);
+		Sleep(600);
 		for (int i = 0; i <= 14; i++)
 		{
 			for (int j = 0; j <= 59; j++)
@@ -327,11 +325,14 @@ void jatek::gameover()
 		}
 		Sleep(1000);
 	}
+	
 	vegsokiir();
 }
 
-void jatek::vegsokiir()
+void jatekos::vegsokiir()
 {
+	end = clock();
+	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	system("cls");
 	pozicio(5, 10);
 	cout << "Points: " << o;
@@ -340,15 +341,16 @@ void jatek::vegsokiir()
 	pozicio(9, 10);
 	cout << "Life: " << elet;
 	pozicio(11, 10);
+	cout << "Time: " << time_spent<<" s";
+	pozicio(13, 10);
 	cout << "Congratulation " << nev<<"!";
 	Sleep(2000);
 	exit(0);
 }
 
-void jatek::elsokiir()
+void jatekos::elsokiir()
 {
 	char folosleg;
-	
 	pozicio(0,0);
 	char a[18][64];
 	ifstream be("cim.txt");
@@ -375,7 +377,7 @@ void jatek::elsokiir()
 	cout << "\tMephisto - The Lord of Hatred - The Eldest of the Three, Leader of Prime Evils, Father of Lilith and Lucion." << endl;
 	cout << "\tDiablo - The Lord of Terror - The Youngest of the Three, The Strongest Prime Evil and Father of Leah. " << endl;
 	cout << endl;
-	cout << "\tKill all of the enemies and win the game!" << endl << "\tMove on the 'P' for more power and 'H' for more health" << endl;
+	cout << "\tKill all of the enemies and win the game!" << endl << "\tMove on the 'P' for more power and 'H' for more health. q-Quit" << endl;
 
 	cout << "Enter your name: ";
 	cin.getline(nev, 29);
@@ -385,6 +387,7 @@ void jatek::elsokiir()
 	folosleg = _getch();
 	system("cls");
 	
+	begin = clock();
 	
 }
 
@@ -394,7 +397,7 @@ int main()
 	int nr = 1;
 	char m = 'h';
 	srand(time(NULL));
-	jatek A;
+	jatekos A(100,100,0);
 	ellenseg E1('d', 115, 4);
 	ellenseg E2('B', 130, 3);
 	ellenseg E3('M', 175, 3);
@@ -438,7 +441,11 @@ int main()
 		E15.randlepes(nr, A);
 		E16.randlepes(nr, A);
 	}
+	
 	A.vegsokiir();
+	
+	
+	
 
 	return 0;
 }
