@@ -18,18 +18,24 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Functions.cpp">
+    <ClCompile Include="Jatekos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellenseg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="valami.txt">
-      <Filter>Source Files</Filter>
-    </Text>
+    <ClInclude Include="Jatekos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellenseg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Functions.h">
+    <Text Include="gameover.txt">
       <Filter>Source Files</Filter>
-    </ClInclude>
+    </Text>
   </ItemGroup>
 </Project>
