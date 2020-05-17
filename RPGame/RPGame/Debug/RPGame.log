@@ -1,5 +1,3 @@
-﻿  Jatekos.cpp
-  Source.cpp
-f:\szabi\rpggame\rpggame\rpgame\rpgame\source.cpp(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
+﻿  Source.cpp
+f:\szabi\rpggame\rpggame\rpgame\rpgame\source.cpp(29): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   RPGame.vcxproj -> F:\Szabi\RPGgame\RPGgame\RPGame\Debug\RPGame.exe

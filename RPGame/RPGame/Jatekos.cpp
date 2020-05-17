@@ -2,7 +2,7 @@
 
 using namespace std;
 
-jatekos::jatekos(int _elet, int _ero, int _olesek)
+jatekos::jatekos(int _elet, int _ero, int _olesek, int _eero1, int _eero2, int _eero3, int _eero4, int _eero5)
 {
 	o = 0;
 	s = 'X';
@@ -17,6 +17,11 @@ jatekos::jatekos(int _elet, int _ero, int _olesek)
 	elet = _elet;
 	ero = _ero;
 	olesek = _olesek;
+	eero1 = _eero1;
+	eero2 = _eero2;
+	eero3 = _eero3;
+	eero4 = _eero4;
+	eero5 = _eero5;
 }
 
 int jatekos::ellenoriz(int d1, int d2)
@@ -59,11 +64,11 @@ void jatekos::mezo()
 	}
 
 	pozicio(0, 34);
-	cout << "  Power: Andariel-" << 50;
-	cout << "  duriel-" << 115;
-	cout << "  Baal-" << 130;
-	cout << "  Mephisto-" << 175;
-	cout << "  Diablo-" << 275;
+	cout << "  Power: Andariel-" << eero1;
+	cout << "  duriel-" << eero2;
+	cout << "  Baal-" << eero3;
+	cout << "  Mephisto-" << eero4;
+	cout << "  Diablo-" << eero5;
 
 }
 
@@ -226,7 +231,8 @@ void jatekos::elsokiir()
 
 	cout << "Enter your name: ";
 	cin.getline(nev, 29);
-
+	cin.getline(nev, 29);  //gfv
+	
 	cout << endl << "Press any key to start the game...";
 
 	folosleg = _getch();

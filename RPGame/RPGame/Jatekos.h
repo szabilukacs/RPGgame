@@ -15,13 +15,14 @@ private:
 	char s, c, h;
 	clock_t begin, end;
 	double time_spent;
+	int eero1, eero2, eero3, eero4,eero5;
 	char nev[30];
 	void pozicio(int, int);
 	int ellenoriz(int, int);
 	void eltuntet(int, int);
 
 public:
-	jatekos(int, int, int);
+	jatekos(int, int, int, int, int, int ,int, int);
 	void kiir(int, int);
 	void lepes(char, int &);
 	void mezo();
